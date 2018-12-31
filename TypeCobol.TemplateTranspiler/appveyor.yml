@@ -8,7 +8,7 @@ configuration:
 
 # scripts to run before build
 before_build:
-- cmd: nuget restore
+- cmd: nuget restore TypeCobol.TemplateTranspiler\TypeCobol.TemplateTranspiler.sln
 
 build:
   project: TypeCobol.TemplateTranspiler\TypeCobol.TemplateTranspiler.sln
