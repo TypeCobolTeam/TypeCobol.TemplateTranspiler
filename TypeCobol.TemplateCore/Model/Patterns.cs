@@ -35,7 +35,7 @@ namespace TypeCobol.TemplateCore.Model
             {
                 return PatternList[index];
             }
-            set => throw new NotImplementedException();
+            set { throw new NotImplementedException(); }
         }
 
         public bool IsReadOnly

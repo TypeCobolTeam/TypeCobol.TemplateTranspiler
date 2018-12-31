@@ -185,7 +185,7 @@ namespace TypeCobol.TemplateCore.Model
             {
                 return SkeletonList[index];
             }
-            set => throw new NotImplementedException();
+            set { throw new NotImplementedException(); }
         }
 
         /// <summary>
