@@ -22,6 +22,7 @@
     </dependencies>
   </metadata>
   <files>
+    <file src=".\Xml\Skeleton.xsd" target="lib\net46\Xml\Skeleton.xsd" />
     <file src=".\bin\Release\TypeCobol.TemplateCore.dll" target="lib\net46\TypeCobol.TemplateCore.dll" />
   </files>
 </package>
