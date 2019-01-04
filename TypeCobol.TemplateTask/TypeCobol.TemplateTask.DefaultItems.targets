@@ -3,15 +3,4 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(EnableDefaultItems)' == 'True' AND '$(EnableDefaultNoneItems)' == 'True'">
-    <None Remove="**/*.xml" />
-  </ItemGroup>
-
-  <!-- Modify the CustomToolNamespace based on the directory location of the Template file -->
-  <ItemGroup>
-    <TCTemplate Update="@(TCTemplate)" DefaultCustomToolNamespace="$([MSBuild]::ValueOrDefault(%(RelativeDir), '').Replace('\', '.').Replace('/', '.').TrimEnd('.'))" />
-    <TCTemplate Update="@(TCTemplate)" Condition="'$(RootNamespace)' != ''" DefaultCustomToolNamespace="$([MSBuild]::ValueOrDefault('$(RootNamespace).%(DefaultCustomToolNamespace)', '').TrimEnd('.'))" />
-    <TCTemplate Update="@(TCTemplate)" CustomToolNamespace="$([MSBuild]::ValueOrDefault(%(CustomToolNamespace), %(DefaultCustomToolNamespace)))" />
-  </ItemGroup>
 </Project>
