@@ -1,0 +1,157 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BuildSystem>MSBuild</BuildSystem>
+    <TaskVersion>4.0.0.0</TaskVersion>
+    <TaskKeyToken>eb42632606e9261f</TaskKeyToken>
+    <TCTemplateBuildTaskAssemblyName Condition="'$(TCTemplateBuildTaskAssemblyName)'==''">TCTemplateBuildTasks, Version=$(TaskVersion), Culture=neutral, PublicKeyToken=$(TaskKeyToken)</TCTemplateBuildTaskAssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LoadTimeSensitiveTargets>
+      $(LoadTimeSensitiveTargets);
+      TCTemplateCompile;
+    </LoadTimeSensitiveTargets>
+    <LoadTimeSensitiveProperties>
+      $(LoadTimeSensitiveProperties);
+      TCTemplateCompileDependsOn;
+    </LoadTimeSensitiveProperties>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TCTemplateBuildTaskLocation> $(TCTemplateBuildTaskPath)</TCTemplateBuildTaskLocation>
+    <TCTemplateToolLocation>$(TCTemplateToolPath)</TCTemplateToolLocation>
+  </PropertyGroup>
+
+  <UsingTask TaskName="TypeCobol.TemplateTask.TemplateClassGenerationTask" AssemblyFile="$(TCTemplateBuildTaskPath)\TypeCobol.TemplateTask.dll" />
+
+  <PropertyGroup>
+    <PrepareResourcesDependsOn>
+      TCTemplateCompile;
+      TCTemplateCompileAddFilesGenerated;
+      $(PrepareResourcesDependsOn)
+    </PrepareResourcesDependsOn>
+    <SourceFilesProjectOutputGroupDependsOn>
+      TCTemplateCompile;
+      TCTemplateCompileAddFilesGenerated;
+      $(SourceFilesProjectOutputGroupDependsOn)
+    </SourceFilesProjectOutputGroupDependsOn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TCTemplateCompileDependsOn>
+      TCTemplateCompileReadGeneratedFileList
+    </TCTemplateCompileDependsOn>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">
+    <AvailableItemName Include="TCTemplate" />
+  </ItemGroup>
+
+  <ItemDefinitionGroup>
+    <TCTemplate>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <Encoding>UTF-8</Encoding>
+      <TargetLanguage>CSharp</TargetLanguage>
+    </TCTemplate>
+  </ItemDefinitionGroup>
+
+  <Target Name="TCTemplateCompileReadGeneratedFileList">
+    <ReadLinesFromFile File="$(IntermediateOutputPath)$(TCTemplateGenCodeFileNames)">
+      <Output TaskParameter="Lines" ItemName="TCTemplateOutputCodeFilesList"/>
+    </ReadLinesFromFile>
+  </Target>
+
+  <PropertyGroup>
+    <!-- Add template compilation to the CoreCompileDependsOn so that the IDE inproc compilers (particularly VB)
+         can "see" the generated source files. -->
+    <CoreCompileDependsOn Condition="'$(BuildingInsideVisualStudio)' == 'true' ">
+      TCTemplateDesignTimeTemplateCompilation;
+      $(CoreCompileDependsOn)
+    </CoreCompileDependsOn>
+  </PropertyGroup>
+
+  <Target Name="TCTemplateDesignTimeTemplateCompilation">
+    <PropertyGroup>
+      <TCTemplateDesignTimeBuild Condition="'$(DesignTimeBuild)' == 'true' OR '$(BuildingProject)' != 'true'">true</TCTemplateDesignTimeBuild>
+    </PropertyGroup>
+
+    <!-- Only if we are not actually performing a compile i.e. we are in design mode -->
+    <CallTarget Condition="'$(TCTemplateDesignTimeBuild)' == 'true'"
+                Targets="TCTemplateCompile" />
+  </Target>
+
+  <Target Name="TCTemplateCompile"
+          DependsOnTargets="$(TCTemplateCompileDependsOn)"
+          Condition="'@(TCTemplate)' != ''"
+          Inputs="@(TCTemplate)"
+          Outputs="@(TCTemplateOutputCodeFilesList);
+                  $(IntermediateOutputPath)$(TCTemplateGenCodeFileNames);">
+
+    <ItemGroup>
+      <TCTemplateGeneratedCodeFiles Remove="@(TCTemplateGeneratedCodeFiles)" />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <TCTemplateDesignTimeBuild>false</TCTemplateDesignTimeBuild>
+      <TCTemplateDesignTimeBuild Condition="'$(DesignTimeBuild)' == 'true' OR '$(BuildingProject)' != 'true'">true</TCTemplateDesignTimeBuild>
+    </PropertyGroup>
+
+    <TemplateClassGenerationTask
+      ToolPath="$(TCTemplateToolLocation)"
+      BuildTaskPath="$(TCTemplateBuildTaskLocation)"
+      OutputPath="$(IntermediateOutputPath)"
+      Encoding="%(TCTemplate.Encoding)"
+      TargetLanguage="%(TCTemplate.TargetLanguage)"
+      TargetFrameworkVersion="$(TargetFrameworkVersion)"
+      TargetNamespace="%(TCTemplate.CustomToolNamespace)"
+      SourceCodeFiles="@(TCTemplate -> '%(FullPath)')"
+      ContinueOnError="$(TCTemplateDesignTimeBuild)"
+      LanguageSourceExtensions="$(DefaultLanguageSourceExtension)">
+
+      <Output ItemName="TCTemplateGeneratedCodeFiles" TaskParameter="GeneratedCodeFiles" />
+    </TemplateClassGenerationTask>
+
+    <WriteLinesToFile
+      Condition="'$(TCTemplateDesignTimeBuild)' != 'true'"
+      File="$(IntermediateOutputPath)$(TCTemplateGenCodeFileNames)"
+      Lines="@(TCTemplateGeneratedCodeFiles)"
+      Overwrite="true"/>
+  </Target>
+
+  <Target Name="TCTemplateCompileAddFilesGenerated"
+          AfterTargets="TCTemplateCompile"
+          Condition="'@(TCTemplate)' != ''">
+
+    <ItemGroup>
+      <TCTemplateGeneratedCodeFiles Condition="'@(TCTemplateGeneratedCodeFiles)' == ''" Include="@(TCTemplateOutputCodeFilesList)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <FileWrites Include="@(TCTemplateGeneratedCodeFiles);
+                           $(IntermediateOutputPath)$(TCTemplateGenCodeFileNames);" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="@(TCTemplateGeneratedCodeFiles)" />
+      <!-- The WinFX "GenerateTemporaryTargetAssembly" target requires generated code files be added here. -->
+      <_GeneratedCodeFiles Include="@(TCTemplateGeneratedCodeFiles)" />
+    </ItemGroup>
+
+  </Target>
+
+      <ItemGroup>
+        <PropertyPageSchema Include="$(MSBuildThisFileDirectory)TypeCobol.TemplatePrjItemSchema.xml">
+          <Context>Project</Context>
+        </PropertyPageSchema>
+        <PropertyPageSchema Include="$(MSBuildThisFileDirectory)TypeCobol.TemplateTask.xml">
+          <Context>File;BrowseObject</Context>
+        </PropertyPageSchema>
+      </ItemGroup>
+
+  <Import Project="TypeCobol.TemplateTask.DefaultItems.targets" />
+</Project>

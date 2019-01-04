@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties">
+  <ContentType Name="TCTemplate" DisplayName="TypeCobol Skeleton Template" ItemType="TCTemplate" />
+  <ItemType Name="TCTemplate" DisplayName="TypeCobol Skeleton Template" />
+  <FileExtension Name=".xml" ContentType="TCTemplate" />
+</ProjectSchemaDefinitions>
