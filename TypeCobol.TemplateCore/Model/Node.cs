@@ -107,7 +107,6 @@ namespace TypeCobol.TemplateCore.Model
             {
                 if (_TranspiledCode == null)
                 {
-                    bool bHasActions = true;//Do we have actions ?
                     //We must Generate the GetActions method for the Node
                     if (Guards.Count > 0)
                     {

@@ -128,7 +128,7 @@ namespace TypeCobol.TemplateTask
                 if (!GenerateOutput(path))
                     bResult = false;
             }
-            return false;
+            return bResult;
         }
 
         /// <summary>
