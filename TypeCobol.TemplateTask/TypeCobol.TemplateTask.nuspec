@@ -2,34 +2,34 @@
 <package >
   <metadata>
     <id>TypeCobol.TemplateTask</id>
-    <version>1.0.0</version>
+    <version>1.2.0</version>
     <authors>TypeCobol Team</authors>
     <owners>TypeCobol Team</owners>
 <!--
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
 -->
-    <licenseUrl>https://github.com/TypeCobolTeam/TypeCobol.TypeCobol.TemplateTranspilier/blob/master/LICENSE.md</licenseUrl>
-    <projectUrl>https://github.com/TypeCobolTeam/TypeCobol.TypeCobol.TemplateTranspilier</projectUrl>
+    <licenseUrl>https://github.com/TypeCobolTeam/TypeCobol.TemplateTranspiler/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/TypeCobolTeam/TypeCobol.TemplateTranspiler</projectUrl>
     <description>TypeCobol Template Task.</description>
-    <repository type="git" url="https://github.com/TypeCobolTeam/TypeCobol.TemplateTranspilier.git" />
+    <repository type="git" url="https://github.com/TypeCobolTeam/TypeCobol.TemplateTranspiler.git" />
     <developmentDependency>true</developmentDependency>
     <tags>TypeCobol</tags>
     <title>TypeCobol Template C# File Generator</title>
   </metadata>
   <files>
     <file src=".\bin\Release\Xml\Skeleton.xsd" target="lib\net46\Xml\Skeleton.xsd" />
-    <file src=".\TypeCobol.TemplatePrjItemSchema.xml" target="lib\net46\TypeCobol.TemplatePrjItemSchema.xml" />
-    <file src=".\TypeCobol.TemplateTask.DefaultItems.props" target="lib\net46\TypeCobol.TemplateTask.DefaultItems.props" />
-    <file src=".\TypeCobol.TemplateTask.DefaultItems.targets" target="lib\net46\TypeCobol.TemplateTask.DefaultItems.targets" />
-    <file src=".\TypeCobol.TemplateTask.props" target="lib\net46\TypeCobol.TemplateTask.props" />
-    <file src=".\TypeCobol.TemplateTask.targets" target="lib\net46\TypeCobol.TemplateTask.targets" />
-    <file src=".\TypeCobol.TemplateTask.xml" target="lib\net46\TypeCobol.TemplateTask.xml" />
-    <file src=".\bin\Release\TypeCobol.TemplateTask.dll" target="lib\net46\TypeCobol.TemplateTask.dll" />
-    <file src=".\bin\Release\TypeCobol.TemplateTranspiler.exe" target="lib\net46\TypeCobol.TemplateTranspiler.exe" />
     <file src=".\bin\Release\Microsoft.Build.Framework.dll" target="lib\net46\Microsoft.Build.Framework.dll" />
-    <file src=".\bin\Release\Microsoft.Build.Utilities.Core.dll" target="lib\net46\Microsoft.Build.Utilities.Core.dll" />
-    <file src=".\bin\Release\System.CodeDom.dll" target="lib\net46\System.CodeDom.dll" />
-    <file src=".\bin\Release\System.Web.Razor.dll" target="lib\net46\System.Web.Razor.dll" />
-    <file src=".\bin\Release\TypeCobol.TemplateCore.dll" target="lib\net46\TypeCobol.TemplateCore.dll" />
+	<file src=".\bin\Release\Microsoft.Build.Utilities.Core.dll" target="lib\net46\Microsoft.Build.Utilities.Core.dll" />
+	<file src=".\bin\Release\TypeCobol.TemplatePrjItemSchema.xml" target="lib\net46\TypeCobol.TemplatePrjItemSchema.xml" />
+	<file src=".\bin\Release\TypeCobol.TemplateTask.DefaultItems.props" target="lib\net46\TypeCobol.TemplateTask.DefaultItems.props" />
+    <file src=".\bin\Release\TypeCobol.TemplateTask.DefaultItems.targets" target="lib\net46\TypeCobol.TemplateTask.DefaultItems.targets" />
+	<file src=".\bin\Release\TypeCobol.TemplateTask.dll" target="lib\net46\TypeCobol.TemplateTask.dll" />
+    <file src=".\bin\Release\TypeCobol.TemplateTask.props" target="lib\net46\TypeCobol.TemplateTask.props" />
+    <file src=".\bin\Release\TypeCobol.TemplateTask.targets" target="lib\net46\TypeCobol.TemplateTask.targets" />
+    <file src=".\bin\Release\TypeCobol.TemplateTask.xml" target="lib\net46\TypeCobol.TemplateTask.xml" />
+    <!-- TypeCobol.TemplateTranspiler.exe and dependencies -->
+	<file src="..\TypeCobol.TemplateTranspiler\bin\Release\System.Web.Razor.dll" target="lib\net46\System.Web.Razor.dll" />
+    <file src="..\TypeCobol.TemplateTranspiler\bin\Release\TypeCobol.TemplateCore.dll" target="lib\net46\TypeCobol.TemplateCore.dll" />
+	<file src="..\TypeCobol.TemplateTranspiler\bin\Release\TypeCobol.TemplateTranspiler.exe" target="lib\net46\TypeCobol.TemplateTranspiler.exe" />
   </files>
 </package>
