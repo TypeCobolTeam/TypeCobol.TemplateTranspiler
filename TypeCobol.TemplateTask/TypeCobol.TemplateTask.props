@@ -9,6 +9,8 @@
     <TCTemplateBuildTaskPath>.</TCTemplateBuildTaskPath>
     <!-- Path to the TypeCobol.TemplateTranspiler tool itself -->
     <TCTemplateToolPath>.</TCTemplateToolPath>
+    <!-- Name of the temporary file used to write result file paths -->
+    <TCTemplateGenCodeFileNames>TCTemplateGenCode.resultPaths</TCTemplateGenCodeFileNames>
   </PropertyGroup>
 
   <Import Project="TypeCobol.TemplateTask.DefaultItems.props" />
