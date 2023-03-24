@@ -17,19 +17,17 @@
     <title>TypeCobol Template C# File Generator</title>
   </metadata>
   <files>
-    <file src=".\bin\Release\Xml\Skeleton.xsd" target="lib\net472\Xml\Skeleton.xsd" />
-    <file src=".\bin\Release\Microsoft.Build.Framework.dll" target="lib\net472\Microsoft.Build.Framework.dll" />
-	<file src=".\bin\Release\Microsoft.Build.Utilities.Core.dll" target="lib\net472\Microsoft.Build.Utilities.Core.dll" />
-	<file src=".\bin\Release\TypeCobol.TemplatePrjItemSchema.xml" target="lib\net472\TypeCobol.TemplatePrjItemSchema.xml" />
-	<file src=".\bin\Release\TypeCobol.TemplateTask.DefaultItems.props" target="lib\net472\TypeCobol.TemplateTask.DefaultItems.props" />
-    <file src=".\bin\Release\TypeCobol.TemplateTask.DefaultItems.targets" target="lib\net472\TypeCobol.TemplateTask.DefaultItems.targets" />
-	<file src=".\bin\Release\TypeCobol.TemplateTask.dll" target="lib\net472\TypeCobol.TemplateTask.dll" />
-    <file src=".\bin\Release\TypeCobol.TemplateTask.props" target="lib\net472\TypeCobol.TemplateTask.props" />
-    <file src=".\bin\Release\TypeCobol.TemplateTask.targets" target="lib\net472\TypeCobol.TemplateTask.targets" />
-    <file src=".\bin\Release\TypeCobol.TemplateTask.xml" target="lib\net472\TypeCobol.TemplateTask.xml" />
+	<file src=".\TypeCobol.TemplatePrjItemSchema.xml" target="lib\netstandard2.0\TypeCobol.TemplatePrjItemSchema.xml" />
+	<file src=".\TypeCobol.TemplateTask.DefaultItems.props" target="lib\netstandard2.0\TypeCobol.TemplateTask.DefaultItems.props" />
+    <file src=".\TypeCobol.TemplateTask.DefaultItems.targets" target="lib\netstandard2.0\TypeCobol.TemplateTask.DefaultItems.targets" />
+	<file src=".\bin\Release\netstandard2.0\TypeCobol.TemplateTask.dll" target="lib\netstandard2.0\TypeCobol.TemplateTask.dll" />
+    <file src=".\TypeCobol.TemplateTask.props" target="lib\netstandard2.0\TypeCobol.TemplateTask.props" />
+    <file src=".\TypeCobol.TemplateTask.targets" target="lib\netstandard2.0\TypeCobol.TemplateTask.targets" />
+    <file src=".\TypeCobol.TemplateTask.xml" target="lib\netstandard2.0\TypeCobol.TemplateTask.xml" />
     <!-- TypeCobol.TemplateTranspiler.exe and dependencies -->
-	<file src="..\TypeCobol.TemplateTranspiler\bin\Release\System.Web.Razor.dll" target="lib\net472\System.Web.Razor.dll" />
-    <file src="..\TypeCobol.TemplateTranspiler\bin\Release\TypeCobol.TemplateCore.dll" target="lib\net472\TypeCobol.TemplateCore.dll" />
-	<file src="..\TypeCobol.TemplateTranspiler\bin\Release\TypeCobol.TemplateTranspiler.exe" target="lib\net472\TypeCobol.TemplateTranspiler.exe" />
+	<file src="..\TypeCobol.TemplateTranspiler\bin\Release\Xml\Skeleton.xsd" target="lib\netstandard2.0\Xml\Skeleton.xsd" />
+	<file src="..\TypeCobol.TemplateTranspiler\bin\Release\System.Web.Razor.dll" target="lib\netstandard2.0\System.Web.Razor.dll" />
+    <file src="..\TypeCobol.TemplateTranspiler\bin\Release\TypeCobol.TemplateCore.dll" target="lib\netstandard2.0\TypeCobol.TemplateCore.dll" />
+	<file src="..\TypeCobol.TemplateTranspiler\bin\Release\TypeCobol.TemplateTranspiler.exe" target="lib\netstandard2.0\TypeCobol.TemplateTranspiler.exe" />
   </files>
 </package>

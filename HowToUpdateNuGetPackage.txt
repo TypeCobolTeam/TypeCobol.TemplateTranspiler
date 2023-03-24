@@ -1,0 +1,6 @@
+- Open TypeCobol.TemplateTranspiler solution and rebuild in Release
+- Edit TypeCobol.TemplateTask.nuspec file to update the version number
+- Open TypeCobol.TemplateTask solution and rebuild in Release
+- Right-Click on TypeCobol.TemplateTask project and launch the Pack action
+
+The update nupkg file is created in bin\Release\netstandard2.0 directory
